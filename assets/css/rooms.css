@@ -1,0 +1,91 @@
+
+
+html, body {
+    height: 100%; /* full viewport height */
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1; /* take all available vertical space */
+}
+
+.rooms-section {
+    padding: 3rem 2rem;
+}
+
+.rooms-section h1 {
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.btn-add {
+    display: inline-block;
+    margin-bottom: 1rem;
+    padding: 0.6rem 1.2rem;
+    background: #1e293b;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px;
+}
+
+.rooms-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+.rooms-table th,
+.rooms-table td {
+    padding: 0.9rem;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+}
+
+.rooms-table th {
+    background: #1e293b;
+    color: #fff;
+}
+
+.rooms-table tr:hover {
+    background: #f8fafc;
+}
+
+.btn {
+    padding: 0.4rem 0.7rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.85rem;
+}
+
+.btn.edit {
+    background: #38bdf8;
+    color: #000;
+}
+
+.btn.delete {
+    background: #ef4444;
+    color: #fff;
+}
+
+.available {
+    color: green;
+    font-weight: 600;
+}
+
+.booked {
+    color: red;
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .rooms-table {
+        font-size: 0.85rem;
+    }
+}
