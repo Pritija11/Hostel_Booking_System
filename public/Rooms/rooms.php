@@ -7,7 +7,7 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
-$stmt = $conn->query("SELECT * FROM rooms ORDER BY id DESC");
+$stmt = $conn->query("SELECT * FROM rooms ");
 $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
@@ -45,8 +45,7 @@ $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     </td>
                     <td>
                         <a href="edit.php?id=<?= $room['id'] ?>" class="btn edit">Edit</a>
-                        <a href="delete.php?id=<?= $room['id'] ?>" class="btn delete"
-                           onclick="return confirm('Delete this room?')">Delete</a>
+                        <a href="delete.php?id=<?= $room['id'] ?>" class="btn delete">Delete</a>
                     </td>
                 </tr>
                 <?php endforeach; ?>

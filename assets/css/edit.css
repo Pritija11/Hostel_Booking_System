@@ -1,0 +1,53 @@
+
+.page-wrapper {
+    min-height: calc(100vh - 160px);
+    padding: 2rem;
+}
+
+.form-section {
+    padding: 2rem;
+    max-width: 500px;
+    margin: 0 auto;
+    background: #f8fafc;
+    border-radius: 10px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+.form-section h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-weight: 500;
+}
+
+.form-group input, .form-group select {
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+button {
+    width: 100%;
+    padding: 0.7rem;
+    border: none;
+    border-radius: 5px;
+    background: #1e293b;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #38bdf8;
+}
+
+#msg{
+    text-align: center;
+    color: red;
+    margin-top: 0.8rem;
+}
