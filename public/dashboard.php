@@ -26,19 +26,19 @@ $user_name = $_SESSION['full_name'] ?? 'User';
             <p>Add, Edit, View or Delete rooms</p>
         </a>
 
-        <a href="../bookings/add.php" class="dashboard-card">
+        <a href="Booking/book.php" class="dashboard-card">
             <i class="fas fa-calendar-check"></i>
             <h3>Book Room</h3>
             <p>Reserve an available room quickly</p>
         </a>
 
-        <a href="../bookings/index.php" class="dashboard-card">
+        <a href="Booking/view_bookings.php" class="dashboard-card">
             <i class="fas fa-list"></i>
             <h3>View Bookings</h3>
             <p>Check all booked rooms and details</p>
         </a>
 
-        <a href="../rooms/search.php" class="dashboard-card">
+        <a href="Booking/search.php" class="dashboard-card">
             <i class="fas fa-search"></i>
             <h3>Search Rooms</h3>
             <p>Search rooms by type or availability</p>

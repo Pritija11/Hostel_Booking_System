@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $phone      = trim($_POST["phone"]);
     $password   = $_POST["password"];
 
-    // Input filtering & validation
+
     if (!$first_name || !$last_name || !$email || !$phone || !$password) {
         $message = "All fields are required.";
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     } else {
         try {
-            // Check if email already exists
+            
             $stmt = $conn->prepare("SELECT id FROM register WHERE email = ?");
             $stmt->execute([$email]);
             if ($stmt->fetch()) {
@@ -36,12 +36,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 if ($stmt->fetch()) {
                     $message = "Phone number is already registered.";
                 } else {
-                    // Hash password and insert
+                    
                     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
                     $stmt = $conn->prepare("INSERT INTO register (first_name, last_name, email, phone, password) VALUES (?, ?, ?, ?, ?)");
                     $stmt->execute([$first_name, $last_name, $email, $phone, $hashedPassword]);
 
-                    // Redirect to login page after successful registration
+                    
                     header("Location: ../auth/login.php");
                     exit;
                 }
@@ -53,37 +53,41 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 }
 ?>
 
-<h2>Register Form</h2>
-<form method="POST" action="">
-    <div class="form-group">
-        <label for="first_name">First Name</label><br>
-        <input type="text" id="first_name" name="first_name" placeholder="Enter your first name" required>
-    </div><br>
+<?php include "../includes/header.php"; ?>
+<link rel="stylesheet" href="../assets/css/header.css">
+<link rel="stylesheet" href="../assets/css/footer.css">
+<link rel="stylesheet" href="../assets/css/register.css">
 
-    <div class="form-group">
-        <label for="last_name">Last Name</label><br>
-        <input type="text" id="last_name" name="last_name" placeholder="Enter your last name" required>
-    </div><br>
+<main class="page-wrapper">
+    <section class="register-section">
+        <h2>Register</h2>
 
-    <div class="form-group">
-        <label for="email">Email</label><br>
-        <input type="email" id="email" name="email" placeholder="Enter your email" required>
-    </div><br>
+        <?php if ($message): ?>
+            <p class="error"><?= htmlspecialchars($message) ?></p>
+        <?php endif; ?>
 
-    <div class="form-group">
-        <label for="phone">Phone Number</label><br>
-        <input type="text" id="phone" name="phone" placeholder="Enter your phone number" pattern="[0-9]{10}" required>
-        <small>10-15 digits only</small>
-    </div><br>
+        <form method="POST" class="register-form" action="">
+            <label for="first_name">First Name</label>
+            <input type="text" id="first_name" name="first_name" placeholder="Enter your first name" required>
 
-    <div class="form-group">
-        <label for="password">Password</label><br>
-        <input type="password" id="password" name="password" placeholder="Enter your password" required>
-        <small>At least 6 characters</small>
-    </div><br>
+            <label for="last_name">Last Name</label>
+            <input type="text" id="last_name" name="last_name" placeholder="Enter your last name" required>
 
-    <button type="submit">Register</button>
-</form>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            <small>Email must end with @gmail.com</small>
 
-<p><?= htmlspecialchars($message) ?></p>
+            <label for="phone">Phone Number</label>
+            <input type="text" id="phone" name="phone" placeholder="Enter your phone number" pattern="[0-9]{10}" required>
+            <small>10 digits only</small>
 
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            <small>At least 6 characters</small>
+
+            <button type="submit">Register</button>
+        </form>
+    </section>
+</main>
+
+<?php include "../includes/footer.php"; ?>

@@ -1,0 +1,94 @@
+/* Make footer stick at bottom */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+/* Page wrapper */
+.page-wrapper {
+    padding: 2rem;
+}
+
+/* Search section */
+.search-section {
+    max-width: 1000px;
+    margin: auto;
+}
+
+/* Search form */
+.search-form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.search-form select,
+.search-form input {
+    padding: 0.6rem;
+    font-size: 0.95rem;
+}
+
+.search-form button {
+    padding: 0.6rem;
+    background: #1e293b;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-form button:hover {
+    background: #0f172a;
+}
+
+/* Table styling */
+.rooms-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+.rooms-table th,
+.rooms-table td {
+    padding: 0.8rem;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+}
+
+.rooms-table th {
+    background: #1e293b;
+    color: #fff;
+}
+
+/* Status colors */
+.available {
+    color: green;
+    font-weight: 600;
+}
+
+.booked {
+    color: red;
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .search-form {
+        grid-template-columns: 1fr;
+    }
+
+    .rooms-table {
+        font-size: 0.9rem;
+    }
+}

@@ -2,7 +2,7 @@
 session_start();
 require "../../config/db.php";
 
-// Check if id is provided
+
 if (!isset($_GET['id'])) {
     header("Location: rooms.php");
     exit;
@@ -20,7 +20,7 @@ if (!$room) {
     die("Room not found.");
 }
 
-// Handle form submission
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $room_type = $_POST['room_type'];
     $capacity = $_POST['capacity'];

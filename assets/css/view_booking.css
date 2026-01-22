@@ -1,0 +1,54 @@
+
+.page-wrapper {
+    min-height: calc(100vh - 160px); /* adjust according to header + footer height */
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.bookings-section {
+    flex: 1;
+    padding: 2rem;
+}
+
+
+.bookings-section h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #1e293b;
+}
+
+
+.bookings-table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    background: #fff;
+}
+
+
+.bookings-table th {
+    background: #1e293b;
+    color: #fff;
+    padding: 0.8rem;
+    text-align: center;
+}
+
+
+.bookings-table td {
+    padding: 0.7rem;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+}
+
+
+.bookings-table tr:hover {
+    background: #f8fafc;
+}
+
+
+@media (max-width: 768px) {
+    .bookings-table {
+        font-size: 0.85rem;
+    }
+}

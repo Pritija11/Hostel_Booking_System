@@ -24,7 +24,7 @@
     <div class="logo">HostelStay</div>
 
     <nav class="nav-links" id="navLinks">
-        <a href="index.php">Home</a>
+        <a href="../public/index.php">Home</a>
         <a href="../auth/login.php">Login</a>
         <a href="../auth/register.php">Register</a>
     </nav>

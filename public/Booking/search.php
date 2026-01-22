@@ -1,0 +1,107 @@
+<?php
+session_start();
+require "../../config/db.php";
+
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: ../../auth/login.php");
+    exit;
+}
+
+$rooms = []; 
+
+
+if (!empty($_GET['room_type']) || !empty($_GET['capacity']) || !empty($_GET['status'])) {
+
+    $query = "SELECT * FROM rooms WHERE 1";
+    $params = [];
+
+    if (!empty($_GET['room_type'])) {
+        $query .= " AND room_type = ?";
+        $params[] = $_GET['room_type'];
+    }
+
+    if (!empty($_GET['capacity'])) {
+        $query .= " AND capacity >= ?";
+        $params[] = (int) $_GET['capacity'];
+    }
+
+    if (!empty($_GET['status'])) {
+        $query .= " AND status = ?";
+        $params[] = $_GET['status'];
+    }
+
+    $stmt = $conn->prepare($query);
+    $stmt->execute($params);
+    $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+?>
+
+
+<?php include "../../includes/header.php"; ?>
+<link rel="stylesheet" href="../../assets/css/header.css">
+<link rel="stylesheet" href="../../assets/css/footer.css">
+<link rel="stylesheet" href="../../assets/css/search.css">
+
+
+<main class="page-wrapper">
+    <section class="search-section">
+        <h1>Search Rooms</h1>
+
+        <!-- Search Form -->
+        <form method="GET" class="search-form">
+            <select name="room_type">
+                <option value="">Any Type</option>
+                <option value="Single">Single</option>
+                <option value="Double">Double</option>
+                <option value="Triple">Triple</option>
+            </select>
+
+            <input type="number" name="capacity" placeholder="Minimum Capacity">
+
+            <select name="status">
+                <option value="">Any Status</option>
+                <option value="Available">Available</option>
+                <option value="Booked">Booked</option>
+            </select>
+
+            <button type="submit">Search</button>
+        </form>
+
+        
+
+
+<?php if (!empty($_GET)): ?> 
+<table class="rooms-table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Room Type</th>
+            <th>Capacity</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+    <?php if (count($rooms) > 0): ?>
+        <?php foreach ($rooms as $room): ?>
+        <tr>
+            <td><?= htmlspecialchars($room['id']) ?></td>
+            <td><?= htmlspecialchars($room['room_type']) ?></td>
+            <td><?= htmlspecialchars($room['capacity']) ?></td>
+            <td class="<?= strtolower($room['status']) ?>">
+                <?= htmlspecialchars($room['status']) ?>
+            </td>
+        </tr>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <tr>
+            <td colspan="4">No rooms found.</td>
+        </tr>
+    <?php endif; ?>
+    </tbody>
+</table>
+</section>
+</main>
+<?php endif; ?>
+
+<?php include "../../includes/footer.php"; ?>

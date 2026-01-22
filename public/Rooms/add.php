@@ -2,7 +2,7 @@
 session_start();
 require "../../config/db.php";
 
-// protect page
+
 if (!isset($_SESSION['user_id'])) {
     header("Location: ../../auth/login.php");
     exit();
@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $room_type = trim($_POST['room_type']);
     $capacity  = trim($_POST['capacity']);
 
-    // Server-side validation
+   
     if ($room_type === "" || $capacity === "") {
         $message = "All fields are required.";
     } elseif (!is_numeric($capacity) || $capacity < 1) {
