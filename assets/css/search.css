@@ -1,41 +1,38 @@
-/* Make footer stick at bottom */
-html, body {
-    height: 100%;
-    margin: 0;
-}
-
 body {
     display: flex;
     flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
 }
 
 main {
     flex: 1;
 }
 
-/* Page wrapper */
-.page-wrapper {
-    padding: 2rem;
-}
-
-/* Search section */
 .search-section {
     max-width: 1000px;
-    margin: auto;
+    margin: 2rem auto;
+    padding: 0 1rem;
 }
 
-/* Search form */
+.search-section h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
 .search-form {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 1rem;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
 }
 
 .search-form select,
 .search-form input {
     padding: 0.6rem;
     font-size: 0.95rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
 .search-form button {
@@ -45,23 +42,28 @@ main {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background 0.3s;
 }
 
 .search-form button:hover {
     background: #0f172a;
 }
 
-/* Table styling */
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
 .rooms-table {
     width: 100%;
     border-collapse: collapse;
     background: #fff;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
 }
 
 .rooms-table th,
 .rooms-table td {
-    padding: 0.8rem;
+    padding: 1rem;
     text-align: center;
     border-bottom: 1px solid #eee;
 }
@@ -71,24 +73,22 @@ main {
     color: #fff;
 }
 
-/* Status colors */
 .available {
-    color: green;
+    color: #10b981;
     font-weight: 600;
 }
 
 .booked {
-    color: red;
+    color: #ef4444;
     font-weight: 600;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
     .search-form {
         grid-template-columns: 1fr;
     }
 
     .rooms-table {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
     }
 }

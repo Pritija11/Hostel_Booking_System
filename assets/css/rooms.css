@@ -1,7 +1,7 @@
 
 
 html, body {
-    height: 100%; /* full viewport height */
+    height: 100%; 
     margin: 0;
 }
 
@@ -11,7 +11,7 @@ body {
 }
 
 main {
-    flex: 1; /* take all available vertical space */
+    flex: 1; 
 }
 
 .rooms-section {
@@ -83,7 +83,6 @@ main {
     font-weight: 600;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
     .rooms-table {
         font-size: 0.85rem;

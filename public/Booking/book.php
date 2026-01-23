@@ -19,7 +19,7 @@ $message = "";
 <link rel="stylesheet" href="../../assets/css/footer.css">
 
 
-<main class="page-wrapper">
+<main >
 <section class="form-section">
     <h2>Book a Room</h2>
 

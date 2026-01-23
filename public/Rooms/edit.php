@@ -26,11 +26,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $capacity = $_POST['capacity'];
     $status = $_POST['status'];
 
-    // Basic validation
+    
     if (!$room_type || !$capacity || !$status || $capacity < 1) {
         $message = "Please enter valid values for all fields.";
     } else {
-        // Update in database
+        
         $stmt = $conn->prepare("UPDATE rooms SET room_type = ?, capacity = ?, status = ? WHERE id = ?");
         if ($stmt->execute([$room_type, $capacity, $status, $room_id])) {
             header("Location: rooms.php");
@@ -47,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <link rel="stylesheet" href="../../assets/css/header.css">
 <link rel="stylesheet" href="../../assets/css/footer.css">
 
-<main class="page-wrapper">
+<main>
     <section class="form-section">
         <h2>Update Room</h2>
 

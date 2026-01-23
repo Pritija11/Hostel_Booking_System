@@ -1,10 +1,20 @@
 
-.page-wrapper {
-    min-height: calc(100vh - 160px); /* adjust according to header + footer height */
-    padding: 2rem;
+html, body {
+    height: 100%;
+}
+
+body {
     display: flex;
     flex-direction: column;
 }
+
+.page-wrapper {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 
 .bookings-section {
     flex: 1;

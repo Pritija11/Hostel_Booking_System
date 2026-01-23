@@ -4,7 +4,8 @@
     box-sizing: border-box;
 }
 
-/* ============ NAVBAR ============ */
+
+
 .navbar {
     display: flex;
     justify-content: space-between;

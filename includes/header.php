@@ -19,14 +19,16 @@
 </head>
 <body>
 
-<!-- ================= HEADER / NAVBAR ================= -->
+
 <header class="navbar">
     <div class="logo">HostelStay</div>
 
     <nav class="nav-links" id="navLinks">
-        <a href="../public/index.php">Home</a>
-        <a href="../auth/login.php">Login</a>
-        <a href="../auth/register.php">Register</a>
+        <a href="/Hostel_Booking_System/public/index.php">Home</a>
+    <a href="/Hostel_Booking_System/auth/register.php">Register</a>
+    <a href="/Hostel_Booking_System/auth/login.php">Login</a>
+    <a href="/Hostel_Booking_System/auth/logout.php">Logout</a>
+    <a href="/Hostel_Booking_System/public/dashboard.php">Dashboard</a>
     </nav>
 
     <div class="hamburger" onclick="toggleMenu()">

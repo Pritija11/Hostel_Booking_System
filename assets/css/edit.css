@@ -1,14 +1,9 @@
 
-.page-wrapper {
-    min-height: calc(100vh - 160px);
-    padding: 2rem;
-}
-
 .form-section {
-    padding: 2rem;
     max-width: 500px;
-    margin: 0 auto;
-    background: #f8fafc;
+    margin: 3.8rem auto;
+    background: #ffffff;
+    padding: 2rem;
     border-radius: 10px;
     box-shadow: 0 6px 18px rgba(0,0,0,0.08);
 }

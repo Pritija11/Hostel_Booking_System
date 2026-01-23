@@ -1,4 +1,4 @@
-/* Dashboard Section */
+
 .dashboard-section {
     padding: 3rem 2rem;
     text-align: center;
@@ -16,7 +16,7 @@
     color: #555;
 }
 
-/* Dashboard Cards */
+
 .dashboard-cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -63,7 +63,7 @@
     color: #38bdf8;
 }
 
-/* Responsive */
+
 @media (max-width: 768px) {
     .dashboard-cards {
         grid-template-columns: 1fr;

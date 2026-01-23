@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <link rel="stylesheet" href="../../assets/css/header.css">
 <link rel="stylesheet" href="../../assets/css/footer.css">
 
-<main class="page-wrapper">
+<main >
     <section class="form-section">
         <h2>Add New Room</h2>
 

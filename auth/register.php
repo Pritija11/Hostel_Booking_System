@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             if ($stmt->fetch()) {
                 $message = "Email is already registered.";
             } else {
-                // Check if phone already exists
+                
                 $stmt = $conn->prepare("SELECT id FROM register WHERE phone = ?");
                 $stmt->execute([$phone]);
                 if ($stmt->fetch()) {
@@ -58,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <link rel="stylesheet" href="../assets/css/footer.css">
 <link rel="stylesheet" href="../assets/css/register.css">
 
-<main class="page-wrapper">
+<main>
     <section class="register-section">
         <h2>Register</h2>
 
@@ -75,16 +75,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             <label for="email">Email</label>
             <input type="email" id="email" name="email" placeholder="Enter your email" required>
-            <small>Email must end with @gmail.com</small>
+            
 
             <label for="phone">Phone Number</label>
             <input type="text" id="phone" name="phone" placeholder="Enter your phone number" pattern="[0-9]{10}" required>
-            <small>10 digits only</small>
+            
 
             <label for="password">Password</label>
             <input type="password" id="password" name="password" placeholder="Enter your password" required>
-            <small>At least 6 characters</small>
-
+            
             <button type="submit">Register</button>
         </form>
     </section>
