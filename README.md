@@ -133,18 +133,6 @@
 
 	Public users cannot access admin routes directly.
 
-# Admin Access
-
-	Only logged-in admins can:
-
-	Access dashboard
-
-	Manage rooms
-
-	View bookings
-
-	Public users cannot access admin routes directly.
-
 # Future Improvements
 
 	Email confirmation for bookings
