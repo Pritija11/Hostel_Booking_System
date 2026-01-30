@@ -57,7 +57,7 @@
 
 	Database: MySQL
 
-	Frontend: HTML5, CSS3
+	Frontend: HTML, CSS
 
 	Server: Apache (XAMPP)
 
