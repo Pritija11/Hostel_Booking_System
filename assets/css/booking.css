@@ -31,6 +31,17 @@ button {
     border-radius: 6px;
 }
 
+.success-msg {
+    color: #28a745;
+    background: #eafaf1;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #28a745;
+    margin-bottom: 1rem;
+    text-align: center;
+    font-weight: 600;
+}
+
 #error, .error {
     color: red;
     margin-bottom: 1rem;

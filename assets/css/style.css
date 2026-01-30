@@ -7,10 +7,9 @@ body {
 
 
 
-/* ================= HERO SECTION ================= */
 .hero-section {
     background: url("../images/hero-bg.jpeg") center/cover no-repeat;
-    min-height: 70vh;
+    min-height: 50vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -19,7 +18,7 @@ body {
 .hero-overlay {
     background: rgba(0, 0, 0, 0.55);
     color: #fff;
-    padding: 3rem 2rem;
+    padding: 2rem 2rem;
     text-align: center;
     max-width: 700px;
     border-radius: 10px;
@@ -34,7 +33,7 @@ body {
     font-size: 1rem;
 }
 
-/* ================= ROOMS SECTION ================= */
+
 .rooms-section {
     padding: 4rem 2rem;
     background: #f8fafc;
@@ -51,7 +50,7 @@ body {
     margin-bottom: 3rem;
 }
 
-/* ================= ROOM CARDS ================= */
+
 .room-cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 340px));
@@ -65,7 +64,7 @@ body {
     overflow: hidden;
     box-shadow: 0 8px 20px rgba(0,0,0,0.08);
     transition: transform 0.3s ease;
-    min-height: 420px;          
+    min-height: auto;          
     display: flex;
     flex-direction: column;
 }
@@ -76,7 +75,7 @@ body {
 
 .room-card img {
     width: 100%;
-    height: 240px;
+    height: 200px;
     object-fit: cover;
 }
 
@@ -92,7 +91,7 @@ body {
     color: #555;
 }
 
-/* ================= RESPONSIVE ================= */
+/
 @media (max-width: 768px) {
     .hero-overlay h1 {
         font-size: 1.6rem;

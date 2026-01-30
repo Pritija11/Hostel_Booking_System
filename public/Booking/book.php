@@ -1,17 +1,18 @@
 <?php
-session_start();
+
+
 require "../../config/db.php";
-
-if (!isset($_SESSION['user_id'])) {
-    header("Location: ../../auth/login.php");
-    exit;
-}
-
 
 $stmt = $conn->query("SELECT DISTINCT room_type FROM rooms");
 $types = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 $message = "";
+$message_type = "";
+if (isset($_GET['status']) && $_GET['status'] === 'success') {
+    $message = "Booking confirmed successfully!";
+    $message_type = "success";
+}
+
 ?>
 <?php include "../../includes/header.php"; ?>
 <link rel="stylesheet" href="../../assets/css/booking.css">
@@ -24,10 +25,19 @@ $message = "";
     <h2>Book a Room</h2>
 
     <?php if ($message): ?>
-        <p class="error"><?= htmlspecialchars($message) ?></p>
+    <p class="<?= ($message_type === 'success') ? 'success-msg' : 'error' ?>">
+        <?= htmlspecialchars($message) ?>
+    </p>
     <?php endif; ?>
 
     <form method="POST" action="process_booking.php" id="bookingForm">
+
+        <label>Full Name</label>
+        <input type="text" name="full_name" placeholder="enter your full name" required>
+
+        <label>Email</label>
+        <input type="email" name="email" placeholder="enter email" required>
+
         
         <label>Room Type</label>
         <select name="room_type" id="roomType" required>

@@ -25,10 +25,12 @@
 
     <nav class="nav-links" id="navLinks">
         <a href="/Hostel_Booking_System/public/index.php">Home</a>
-    <a href="/Hostel_Booking_System/auth/register.php">Register</a>
     <a href="/Hostel_Booking_System/auth/login.php">Login</a>
     <a href="/Hostel_Booking_System/auth/logout.php">Logout</a>
+    <a href="/Hostel_Booking_System/public/Booking/book.php">Book room</a>
+    <a href="/Hostel_Booking_System/public/Booking/search.php">search room</a>
     <a href="/Hostel_Booking_System/public/dashboard.php">Dashboard</a>
+
     </nav>
 
     <div class="hamburger" onclick="toggleMenu()">

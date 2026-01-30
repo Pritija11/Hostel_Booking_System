@@ -1,25 +1,27 @@
 <?php
-session_start(); 
+require "../config/session.php";
+require "../config/csrf.php";
 require "../config/db.php";
 
+verify_csrf();
 $message = "";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $email = trim($_POST["email"]);
+    
+    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+    $email = trim($email);
     $password = $_POST["password"];
 
     if (!$email || !$password) {
         $message = "Please enter both email and password.";
     } else {
-        $stmt = $conn->prepare("SELECT * FROM register WHERE email = ?");
+        $stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
         $stmt->execute([$email]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($user && password_verify($password, $user['password'])) {
             $_SESSION['user_id'] = $user['id'];
-            $_SESSION['first_name'] = $user['first_name'];
-            $_SESSION['last_name'] = $user['last_name'];
-
+            $_SESSION['role'] = $user['role'];
             header("Location: ../public/dashboard.php");
             exit;
         } else {
@@ -39,6 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <h2>Login</h2>
 
         <form method="POST" class="login-form">
+            <input type="hidden" name="csrf_token" value="<?= csrf_token() ?>">
             <label>Email</label>
             <input type="email" name="email" placeholder="Enter your Gmail" required>
 

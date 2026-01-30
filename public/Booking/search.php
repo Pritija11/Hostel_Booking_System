@@ -1,11 +1,10 @@
 <?php
-session_start();
+
 require "../../config/db.php";
 
-if (!isset($_SESSION['user_id'])) {
-    header("Location: ../../auth/login.php");
-    exit;
-}
+$room_type     = filter_input(INPUT_GET, 'room_type', FILTER_SANITIZE_SPECIAL_CHARS);
+$capacity = filter_input(INPUT_GET, 'capacity', FILTER_SANITIZE_NUMBER_INT);
+$status   = filter_input(INPUT_GET, 'status', FILTER_SANITIZE_SPECIAL_CHARS);
 
 $rooms = []; 
 
@@ -51,7 +50,7 @@ if (!empty($_GET['room_type']) || !empty($_GET['capacity']) || !empty($_GET['sta
                 <option value="Triple">Triple</option>
             </select>
 
-            <input type="number" name="capacity" placeholder="Minimum Capacity">
+            <input type="number" name="capacity" placeholder=" minimum capacity">
 
             <select name="status">
                 <option value="">Any Status</option>

@@ -1,7 +1,7 @@
 <?php
 require "../../config/db.php";
 
-$type = $_GET['type'] ?? "";
+$type = filter_input(INPUT_GET, 'type', FILTER_SANITIZE_SPECIAL_CHARS);
 
 $stmt = $conn->prepare(
     "SELECT COUNT(*) FROM rooms WHERE room_type = ? AND status = 'Available'"

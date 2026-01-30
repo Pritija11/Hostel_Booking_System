@@ -1,6 +1,6 @@
 <?php
 $host = "localhost";
-$dbname = "hostel_booking_system";
+$dbname = "booking_system";
 $username = "root";
 $password = "";
 

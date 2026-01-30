@@ -1,19 +1,25 @@
 <?php
-session_start();
+require "../../config/session.php";
+require "../../config/csrf.php";
 require "../../config/db.php";
 
 
-if (!isset($_SESSION['user_id'])) {
-    header("Location: ../../auth/login.php");
+if (!isset($_SESSION['user_id']) || ($_SESSION['role'] ?? '') !== 'admin') {
+    header("Location: ../auth/login.php");
     exit();
 }
+
+
 
 $message = "";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-    $room_type = trim($_POST['room_type']);
-    $capacity  = trim($_POST['capacity']);
+    verify_csrf();
+    $room_type = filter_input(INPUT_POST, 'room_type', FILTER_SANITIZE_SPECIAL_CHARS);
+    $room_type = trim($room_type);
+    $capacity = filter_input(INPUT_POST, 'capacity', FILTER_SANITIZE_NUMBER_INT);
+    $capacity = trim($capacity);
 
    
     if ($room_type === "" || $capacity === "") {
@@ -46,6 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <?php endif; ?>
 
         <form method="POST" class="room-form">
+            <input type="hidden" name="csrf_token" value="<?= csrf_token() ?>">
             <label>Room Type</label>
             <select name="room_type" required>
                 <option value="">Select room type</option>

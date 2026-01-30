@@ -1,27 +1,27 @@
 <?php
-session_start();
+require "../../config/session.php";
 require "../../config/db.php";
 
 
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['user_id']) || ($_SESSION['role'] ?? '') !== 'admin') {
     header("Location: ../auth/login.php");
-    exit;
+    exit();
 }
 
 
 $stmt = $conn->prepare("
     SELECT 
         bookings.id AS booking_id,
+        bookings.full_name,
         rooms.room_type,
         rooms.capacity,
         bookings.check_in,
         bookings.check_out
     FROM bookings
     JOIN rooms ON bookings.room_id = rooms.id
-    WHERE bookings.user_id = ?
     ORDER BY bookings.id DESC
 ");
-$stmt->execute([$_SESSION['user_id']]);
+$stmt->execute();
 $bookings = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
@@ -38,10 +38,12 @@ $bookings = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <thead>
                 <tr>
                     <th>ID</th>
+                    <th>Guest Name</th>
                     <th>Room Type</th>
                     <th>Capacity</th>
                     <th>Check-In</th>
                     <th>Check-Out</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -49,10 +51,18 @@ $bookings = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <?php foreach ($bookings as $b): ?>
                         <tr>
                             <td><?= htmlspecialchars($b['booking_id']) ?></td>
+                            <td><?= htmlspecialchars($b['full_name']) ?></td>
                             <td><?= htmlspecialchars($b['room_type']) ?></td>
                             <td><?= htmlspecialchars($b['capacity']) ?></td>
                             <td><?= htmlspecialchars($b['check_in']) ?></td>
                             <td><?= htmlspecialchars($b['check_out']) ?></td>
+                            <td>
+                        <a href="delete_booking.php?id=<?= $b['booking_id'] ?>" 
+                           class="btn-delete" 
+                           onclick="return confirm('Delete this booking and make room available?')">
+                           Delete
+                        </a>
+                    </td>
                         </tr>
                     <?php endforeach; ?>
                 <?php else: ?>

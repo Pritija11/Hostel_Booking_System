@@ -1,17 +1,26 @@
 <?php
-session_start();
+require "../../config/session.php";
+require "../../config/csrf.php";
 require "../../config/db.php";
 
-
-if (!isset($_GET['id'])) {
-    header("Location: rooms.php");
-    exit;
+if (!isset($_SESSION['user_id']) || ($_SESSION['role'] ?? '') !== 'admin') {
+    header("Location: ../auth/login.php");
+    exit();
 }
 
-$room_id = $_GET['id'];
+$room_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+
+
+if ($room_id <= 0) {
+    header("Location: rooms.php");
+    exit();
+}
+
+
+
 $message = "";
 
-// Fetch current room data
+
 $stmt = $conn->prepare("SELECT * FROM rooms WHERE id = ?");
 $stmt->execute([$room_id]);
 $room = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -22,10 +31,15 @@ if (!$room) {
 
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $room_type = $_POST['room_type'];
-    $capacity = $_POST['capacity'];
-    $status = $_POST['status'];
 
+    verify_csrf();
+
+    $room_type = filter_input(INPUT_POST, 'room_type', FILTER_SANITIZE_SPECIAL_CHARS);
+    $status    = filter_input(INPUT_POST, 'status', FILTER_SANITIZE_SPECIAL_CHARS);
+    $capacity  = filter_input(INPUT_POST, 'capacity', FILTER_SANITIZE_NUMBER_INT);
+    $room_type = trim($room_type);
+    $status    = trim($status);
+    $capacity  = trim($capacity);
     
     if (!$room_type || !$capacity || !$status || $capacity < 1) {
         $message = "Please enter valid values for all fields.";
@@ -52,6 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <h2>Update Room</h2>
 
         <form method="POST">
+            <input type="hidden" name="csrf_token" value="<?= csrf_token() ?>">
             <div class="form-group">
                 <label for="room_type">Room Type</label>
                 <select id="room_type" name="room_type" required>

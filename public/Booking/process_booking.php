@@ -1,18 +1,15 @@
 <?php
-session_start();
+
 require "../../config/db.php";
 
-if (!isset($_SESSION['user_id'])) {
-    header("Location: ../../auth/login.php");
-    exit;
-}
+$full_name = filter_input(INPUT_POST, 'full_name', FILTER_SANITIZE_SPECIAL_CHARS);
+$email     = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
 
-$user_id  = $_SESSION['user_id'];
-$type     = $_POST['room_type'] ?? "";
-$check_in = $_POST['check_in'] ?? "";
-$check_out= $_POST['check_out'] ?? "";
+$type     = filter_input(INPUT_POST, 'room_type', FILTER_SANITIZE_SPECIAL_CHARS);
+$check_in = filter_input(INPUT_POST, 'check_in', FILTER_SANITIZE_SPECIAL_CHARS);
+$check_out= filter_input(INPUT_POST, 'check_out', FILTER_SANITIZE_SPECIAL_CHARS);
 
-if (!$type || !$check_in || !$check_out) {
+if (!$full_name || !$email || !$type || !$check_in || !$check_out) {
     die("All fields required");
 }
 
@@ -31,10 +28,10 @@ if (!$room) {
 
 
 $stmt = $conn->prepare(
-    "INSERT INTO bookings (user_id, room_id, check_in, check_out)
-     VALUES (?, ?, ?, ?)"
+    "INSERT INTO bookings (full_name, email, room_id, check_in, check_out)
+     VALUES (?,?, ?, ?, ?)"
 );
-$stmt->execute([$user_id, $room['id'], $check_in, $check_out]);
+$stmt->execute([$full_name, $email, $room['id'], $check_in, $check_out]);
 
 
 $stmt = $conn->prepare(
@@ -42,5 +39,5 @@ $stmt = $conn->prepare(
 );
 $stmt->execute([$room['id']]);
 
-header("Location: ../dashboard.php");
+header("Location: book.php?status=success");
 exit;
